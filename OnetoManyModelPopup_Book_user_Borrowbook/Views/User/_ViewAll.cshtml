@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OnetoManyModelPopup_Book_user_Borrowbook.Models.User>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model=>model.UserId)</th>
+            <th>@Html.DisplayNameFor(model=>model.UserName)</th>
+            
+
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","User",null,Context.Request.Scheme)','New User')" class="btn btn-success text-white">New User</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor( e => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor( e => item.UserName)
+                </td>
+               
+
+
+                <td>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","User",new {id=item.UserId},Context.Request.Scheme)','Update User')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                    <form asp-action="Delete" asp-route-id="@item.UserId" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

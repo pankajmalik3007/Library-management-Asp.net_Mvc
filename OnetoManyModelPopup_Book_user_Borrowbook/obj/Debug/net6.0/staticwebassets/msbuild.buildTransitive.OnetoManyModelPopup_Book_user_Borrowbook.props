@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\OnetoManyModelPopup_Book_user_Borrowbook.props" />
+</Project>

@@ -1,0 +1,42 @@
+﻿@model List<OnetoManyModelPopup_Book_user_Borrowbook.Models.BorrowBook>
+
+<h1>Borrowed Books Details by Title</h1>
+
+<form asp-controller="BorrowBook" asp-action="BorrowBookDetailsByTitleName" method="post">
+    <div class="form-group">
+        <label for="bookTitle">Book Title:</label>
+        <input type="text" id="bookTitle" name="bookTitle" class="form-control" value="@ViewData["BorrowBookDetailsByTitleName"]" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h2>Search Results:</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+                <!-- Add other columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var borrowedBook in Model)
+            {
+                <tr>
+                    <td>@borrowedBook.Book.Title</td>
+                    <td>@borrowedBook.BorrowDate</td>
+                    <td>@borrowedBook.ReturnDate</td>
+                    <!-- Add other columns as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrEmpty(ViewData["SearchTerm"] as string))
+{
+    <p>No results found for "@ViewData["SearchTerm"]".</p>
+}

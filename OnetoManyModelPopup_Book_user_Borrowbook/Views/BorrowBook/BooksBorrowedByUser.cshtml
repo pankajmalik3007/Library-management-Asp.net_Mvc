@@ -1,0 +1,39 @@
+﻿@model List<BorrowBook> 
+
+<h2>Books Borrowed by User</h2>
+
+<form asp-action="BooksBorrowedByUser" method="post">
+    <div class="form-group">
+        <label for="userId">Enter User ID:</label>
+        <input type="text" class="form-control" id="userId" name="userId">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h3>Books Borrowed by User:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var borrowedBook in Model)
+            {
+                <tr>
+                    <td>@borrowedBook.Book.Title</td>
+                    <td>@borrowedBook.BorrowDate</td>
+                    <td>@borrowedBook.ReturnDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model != null && Model.Count == 0)
+{
+    <p>No books borrowed by this user.</p>
+}

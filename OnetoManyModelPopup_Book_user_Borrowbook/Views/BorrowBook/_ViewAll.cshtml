@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OnetoManyModelPopup_Book_user_Borrowbook.Models.BorrowBook>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model=>model.BorrowBookId)</th>
+            <th>@Html.DisplayNameFor(model=>model.User.UserName)</th>
+            <th>@Html.DisplayNameFor(model=>model.Book.Title)</th>
+            <th>@Html.DisplayNameFor(model=>model.BorrowDate)</th>
+            <th>@Html.DisplayNameFor(model=>model.ReturnDate)</th>
+
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","BorrowBook",null,Context.Request.Scheme)','Borrow Book')" class="btn btn-success text-white">Borrow Book</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor( e => item.BorrowBookId)
+                </td>
+                <td>
+                    @Html.DisplayFor( e => item.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor( e => item.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor( e => item.BorrowDate)
+                </td>
+                <td>
+                    @Html.DisplayFor( e => item.ReturnDate)
+                </td>
+
+
+                <td>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","BorrowBook",new {id=item.BorrowBookId},Context.Request.Scheme)','Update BorrowBook')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                    <form asp-action="Delete" asp-route-id="@item.BorrowBookId" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

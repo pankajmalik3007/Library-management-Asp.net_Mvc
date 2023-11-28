@@ -1,0 +1,14 @@
+﻿@model IEnumerable<OnetoManyModelPopup_Book_user_Borrowbook.Models.BorrowBook>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

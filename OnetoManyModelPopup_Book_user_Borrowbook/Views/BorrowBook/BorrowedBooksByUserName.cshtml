@@ -1,0 +1,41 @@
+﻿@model List<BorrowBook>
+
+<h2>Borrowed Books by Username</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="userName">Enter User Name:</label>
+        <input type="text" id="userName" name="userName" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var borrowedBook in Model)
+            {
+                <tr>
+                    <td>@borrowedBook.Book.Title</td>
+                    <td>@borrowedBook.BorrowDate.ToShortDateString()</td>
+                    <td>@borrowedBook.ReturnDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model != null && Model.Count == 0)
+{
+    <p>No borrowed books found for the specified user.</p>
+}
+
